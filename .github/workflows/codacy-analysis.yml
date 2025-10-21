@@ -1,0 +1,20 @@
+name: Codacy Analysis CI
+
+on:
+  push:
+    branches: [ main, master ]   #  triggers on both main & master
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:              # allows manual trigger
+
+jobs:
+  codacy-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@d632d8b17e3acbe6df9a8c934a7f04d3e2b2b5f7   # pinned SHA for v3.6.0
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@4cf9cf8bb41a1df6e0f967e91b7775fdadad9b94   #  pinned SHA for latest release
+        with:
+          tool: all
